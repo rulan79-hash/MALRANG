@@ -1,0 +1,1297 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>사회복지학과 수강신청 체크표 v29</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#fff;
+      --line:#d9dde7;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --blue:#2563eb;
+      --blue-bg:#eff6ff;
+      --red:#dc2626;
+      --red-bg:#fef2f2;
+      --green:#059669;
+      --green-bg:#ecfdf5;
+      --yellow:#b45309;
+      --yellow-bg:#fffbeb;
+      --indigo:#4f46e5;
+      --indigo-bg:#eef2ff;
+      --shadow:0 8px 24px rgba(15,23,42,.08);
+    }
+    *{box-sizing:border-box}
+    html,body,#courseGrid,.toolbar,.course-card{
+      overflow-anchor:none;
+    }
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.45;
+    }
+    header{
+      padding:28px 20px 18px;
+      background:#fff;
+      border-bottom:1px solid var(--line);
+    }
+    .wrap{max-width:1280px;margin:0 auto}
+    h1{margin:0;font-size:28px;letter-spacing:-.04em}
+    .sub{margin-top:8px;color:var(--muted);font-size:14px}
+    .copyright-note{
+      margin-top:6px;
+      color:#6b7280;
+      font-size:12px;
+      font-weight:400;
+      text-align:right;
+    }
+    .copyright-note a{
+      color:#2563eb;
+      text-decoration:none;
+      font-weight:400;
+    }
+    .notice{
+      margin-top:10px;
+      padding:10px 12px;
+      border:1px solid #bfdbfe;
+      background:var(--blue-bg);
+      border-radius:12px;
+      color:#1e3a8a;
+      font-size:14px;
+      line-height:1.35;
+    }
+    .notice p{
+      margin:4px 0;
+    }
+    .notice strong{
+      font-weight:900;
+    }
+    .notice .important{
+      color:#dc2626;
+      font-weight:900;
+    }
+    main{padding:20px}
+    .layout{
+      display:grid;
+      grid-template-columns:340px 1fr;
+      gap:18px;
+      align-items:start;
+    }
+    @media (max-width:960px){
+      .layout{grid-template-columns:1fr}
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      margin-bottom:18px;
+    }
+    .card h2{
+      margin:0;
+      padding:16px 18px;
+      font-size:18px;
+      border-bottom:1px solid var(--line);
+      letter-spacing:-.03em;
+    }
+    .course-select-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .course-select-title em{
+      font-style:normal;
+      font-size:12px;
+      font-weight:800;
+      color:#dc2626;
+      background:#fef2f2;
+      border:1px solid #fecaca;
+      border-radius:999px;
+      padding:4px 9px;
+      letter-spacing:0;
+    }
+    .card-body{padding:16px 18px}
+    label{font-size:13px;color:#374151;font-weight:800}
+    select,input[type="number"],input[type="text"]{
+      width:100%;
+      margin-top:6px;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:#fff;
+      font-size:14px;
+    }
+    .field{margin-bottom:14px}
+    .small{font-size:12px;color:var(--muted)}
+    .inline{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:8px;
+    }
+    .metrics{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .metrics.two{
+      grid-template-columns:repeat(2,1fr);
+    }
+    @media (max-width:760px){
+      .metrics{grid-template-columns:1fr}
+      .inline{grid-template-columns:1fr}
+    }
+    .metric{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:14px;
+      padding:12px;
+    }
+    .metric .name{font-size:12px;color:var(--muted);font-weight:800}
+    .metric .value{font-size:22px;font-weight:900;margin-top:4px;letter-spacing:-.04em}
+    .metric.ok{border-color:#a7f3d0;background:var(--green-bg)}
+    .metric.bad{border-color:#fecaca;background:var(--red-bg)}
+    .metric.warn{border-color:#fde68a;background:var(--yellow-bg)}
+    .bar{
+      height:8px;
+      background:#e5e7eb;
+      border-radius:999px;
+      overflow:hidden;
+      margin-top:8px;
+    }
+    .bar > i{
+      display:block;
+      height:100%;
+      width:0;
+      background:var(--blue);
+      border-radius:999px;
+    }
+    .req-list{
+      display:grid;
+      gap:8px;
+      margin:0;
+      padding:0;
+      list-style:none;
+    }
+    .req-list li{
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      padding:8px 10px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      font-size:13px;
+      background:#fff;
+    }
+    .section-title{
+      margin:18px 0 10px;
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:-.03em;
+    }
+    .section-note{
+      display:inline-flex;
+      margin-left:6px;
+      padding:2px 7px;
+      border-radius:999px;
+      background:#fef2f2;
+      color:#dc2626;
+      font-size:11px;
+      font-weight:900;
+      vertical-align:middle;
+    }
+    details{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      background:#fff;
+      margin-top:10px;
+    }
+    summary{cursor:pointer;font-weight:900}
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      min-height:22px;
+      padding:2px 8px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .tag.req{color:var(--red);background:var(--red-bg)}
+    .tag.ele{color:var(--blue);background:var(--blue-bg)}
+    .tag.hf{color:var(--green);background:var(--green-bg)}
+    .tag.major{color:#3730a3;background:#eef2ff}
+    .tag.gen{color:#475569;background:#f1f5f9}
+    .tag.ilseon{color:#92400e;background:#fffbeb}
+    .tag.att{color:#7c2d12;background:#ffedd5}
+    .tag.none{color:#6b7280;background:#f3f4f6}
+    .tag.term{color:#1e3a8a;background:#dbeafe}
+    .tag.final{color:#581c87;background:#f3e8ff}
+    .row{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    button{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:13px;
+      cursor:pointer;
+    }
+    button.active{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+    .filters{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin:12px 0;
+    }
+    .term-summary{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:10px;
+    }
+    @media (max-width:760px){
+      .term-summary{grid-template-columns:1fr}
+    }
+    .term-card{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      background:#fff;
+    }
+    .term-card.has{
+      border-color:#bfdbfe;
+      background:#f8fbff;
+    }
+    .term-head{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+      margin-bottom:8px;
+    }
+    .term-title{font-weight:900;letter-spacing:-.03em}
+    .term-sub{font-size:12px;color:var(--muted);margin-top:2px}
+    .term-num{
+      font-size:20px;
+      font-weight:900;
+      color:#1d4ed8;
+      white-space:nowrap;
+    }
+    .mini-stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:6px;
+      margin:8px 0;
+    }
+    .mini{
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:6px;
+      text-align:center;
+      background:#fff;
+    }
+    .mini b{display:block;font-size:15px}
+    .mini span{font-size:11px;color:var(--muted)}
+    .course-pills{
+      display:flex;
+      gap:5px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:5px 8px;
+      border-radius:999px;
+      background:#eef2ff;
+      color:#312e81;
+      font-size:12px;
+      font-weight:800;
+    }
+    .pill em{
+      font-style:normal;
+      font-size:10px;
+      opacity:.82;
+      padding-left:2px;
+    }
+    .pill.req{background:#fef2f2;color:#991b1b}
+    .pill.ele{background:#eff6ff;color:#1d4ed8}
+    .pill.hf{background:#ecfdf5;color:#047857}
+    .pill.gen{background:#f1f5f9;color:#334155}
+    .pill.default{background:#f3f4f6;color:#374151}
+    .summary-legend{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .toolbar{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:flex-end;
+      margin-bottom:12px;
+      scroll-margin-top:16px;
+    }
+    .searchbox{min-width:260px;flex:1}
+    .course-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:12px;
+      align-items:start;
+    }
+    #gridSpacer{
+      height:0;
+      pointer-events:none;
+    }
+    @media (max-width:1180px){
+      .course-grid{grid-template-columns:repeat(2, minmax(0,1fr))}
+    }
+    @media (max-width:720px){
+      .course-grid{grid-template-columns:1fr}
+    }
+    .course-card{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#fff;
+      padding:14px;
+      min-height:260px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .course-card.checked{
+      border-color:#93c5fd;
+      box-shadow:0 0 0 3px #dbeafe;
+    }
+    .course-top{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .course-title{
+      margin:0;
+      font-size:17px;
+      font-weight:900;
+      letter-spacing:-.04em;
+      line-height:1.25;
+    }
+    .course-meta{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:4px;
+    }
+    .check{
+      width:20px;
+      height:20px;
+      flex:0 0 auto;
+      cursor:pointer;
+    }
+    .badge-row{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+    }
+    .info{
+      border-top:1px dashed var(--line);
+      padding-top:10px;
+      display:grid;
+      gap:6px;
+      font-size:13px;
+    }
+    .info div{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .info span:first-child{color:var(--muted)}
+    .info span:last-child{text-align:right;font-weight:700}
+    .select-area{
+      margin-top:auto;
+      padding-top:10px;
+      border-top:1px solid var(--line);
+    }
+    .term-select{
+      width:100%;
+      margin:6px 0 0;
+      padding:9px 10px;
+      border-radius:10px;
+    }
+    .note{
+      font-size:12px;
+      color:var(--muted);
+      background:#f9fafb;
+      border:1px solid #eef0f4;
+      border-radius:10px;
+      padding:8px;
+    }
+    .empty{
+      padding:24px;
+      border:1px dashed var(--line);
+      border-radius:14px;
+      color:var(--muted);
+      text-align:center;
+      background:#fafafa;
+    }
+    .footer-note{
+      margin:18px 0 0;
+      color:var(--muted);
+      font-size:12px;
+    }
+    @media print{
+      @page{
+        size:A4 landscape;
+        margin:10mm;
+      }
+      html,body{
+        width:100%;
+        background:#fff!important;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+      }
+      header{
+        display:block!important;
+        padding:0 0 8px 0!important;
+        border-bottom:1px solid #ddd!important;
+        background:#fff!important;
+      }
+      header h1{
+        font-size:20px!important;
+        margin:0!important;
+      }
+      header .sub{
+        font-size:11px!important;
+        margin-top:3px!important;
+      }
+      header .copyright-note{
+        display:block!important;
+        font-size:9px!important;
+        margin-top:2px!important;
+        text-align:right!important;
+        color:#555!important;
+        font-weight:400!important;
+      }
+      header .notice{
+        display:block!important;
+        font-size:10px!important;
+        line-height:1.25!important;
+        padding:5px 7px!important;
+        margin-top:4px!important;
+        border-radius:6px!important;
+      }
+      header .notice p{
+        margin:2px 0!important;
+      }
+      main{
+        padding:0!important;
+      }
+      .wrap{
+        max-width:none!important;
+        width:100%!important;
+        margin:0!important;
+      }
+      .layout{
+        display:block!important;
+        width:100%!important;
+      }
+      aside.card{
+        display:none!important;
+      }
+      section{
+        width:100%!important;
+      }
+      .toolbar,
+      .filters,
+      .hide-print,
+      section > .card:last-of-type{
+        display:none!important;
+      }
+      .card{
+        box-shadow:none!important;
+        border:1px solid #ddd!important;
+        border-radius:8px!important;
+        margin-bottom:8px!important;
+        page-break-inside:avoid;
+        break-inside:avoid;
+      }
+      .card h2{
+        padding:8px 10px!important;
+        font-size:15px!important;
+      }
+      .card-body{
+        padding:8px 10px!important;
+      }
+      .metrics{
+        display:grid!important;
+        grid-template-columns:repeat(3, 1fr)!important;
+        gap:6px!important;
+        margin-bottom:6px!important;
+      }
+      .metrics.two{
+        grid-template-columns:repeat(2, 1fr)!important;
+      }
+      .metric{
+        padding:8px!important;
+        border-radius:8px!important;
+        page-break-inside:avoid;
+        break-inside:avoid;
+      }
+      .metric .name{
+        font-size:10px!important;
+      }
+      .metric .value{
+        font-size:17px!important;
+        margin-top:2px!important;
+      }
+      .bar{
+        height:5px!important;
+        margin-top:4px!important;
+      }
+      .summary-legend{
+        margin-bottom:6px!important;
+        gap:5px!important;
+      }
+      .tag{
+        min-height:18px!important;
+        padding:1px 6px!important;
+        font-size:10px!important;
+      }
+      .term-summary{
+        display:grid!important;
+        grid-template-columns:repeat(4, 1fr)!important;
+        gap:6px!important;
+      }
+      .term-card{
+        padding:8px!important;
+        border-radius:8px!important;
+        min-height:74px!important;
+        page-break-inside:avoid;
+        break-inside:avoid;
+      }
+      .term-head{
+        margin-bottom:4px!important;
+      }
+      .term-title{
+        font-size:12px!important;
+      }
+      .term-sub{
+        font-size:10px!important;
+      }
+      .term-num{
+        font-size:12px!important;
+      }
+      .course-pills{
+        gap:3px!important;
+        margin-top:4px!important;
+      }
+      .pill{
+        padding:3px 5px!important;
+        font-size:10px!important;
+        gap:3px!important;
+      }
+      .pill em{
+        font-size:9px!important;
+      }
+      .footer-note{
+        display:none!important;
+      }
+    }
+  </style>
+  <meta name="seoul-sabok-credit" content="서울사복">
+</head>
+<body>
+<!-- 2026-2학기 평가유형 최신 기준 반영: 교양 중간과제물 기준 / 서울사복 -->
+<!-- 내부 식별 표기: 서울사복 -->
+<header>
+  <div class="wrap">
+    <h1>사회복지학과 수강신청 체크표</h1>
+    <div class="copyright-note">© 한국방송통신대학교 서울지역대학 사회복지학과 제9대 학생회 | 무단 수정·재배포 금지 | 서울사복학생회카페 <a href="https://cafe.daum.net/Ksocialwelfare" target="_blank" rel="noopener">https://cafe.daum.net/Ksocialwelfare</a></div>
+    <div class="notice">
+      <p><span class="important">최종 수강신청 전에는 반드시 학교 공지와 학과 안내를 함께 확인해 주세요.</span></p>
+      <p>어떻게 하면 학우님들의 수강신청에 도움이 될 수 있을까 고민하다 만들어 보았습니다. 학우님의 수강계획을 세우는 데 도움이 되길 바라며💖 졸업까지 아자자! 서울사복이 응원하겠습니다. 😊</p>
+      <p><strong>한국방송통신대학교 서울지역대학 사회복지학과 제9대 학생회 일동</strong></p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap layout">
+    <aside class="card">
+      <h2>기준 설정</h2>
+      <div class="card-body">
+        <div class="field">
+          <label for="admission">입학 구분</label>
+          <select id="admission">
+            <option value="fresh_spring">1학년 신입학 · 1학기</option>
+            <option value="fresh_fall">1학년 신입학 · 2학기</option>
+            <option value="tr2_spring">2학년 편입학 · 1학기</option>
+            <option value="tr2_fall">2학년 편입학 · 2학기</option>
+            <option value="tr3_spring">3학년 편입학 · 1학기</option>
+            <option value="tr3_fall">3학년 편입학 · 2학기</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>편입 인정학점</label>
+          <div class="inline">
+            <div>
+              <span class="small">교양</span>
+              <input id="recGen" type="number" min="0" value="0">
+            </div>
+            <div>
+              <span class="small">전공</span>
+              <input id="recMajor" type="number" min="0" value="0">
+            </div>
+            <div>
+              <span class="small">합계</span>
+              <input id="recTotal" type="number" min="0" value="0">
+            </div>
+          </div>
+          <div class="small" style="margin-top:6px">
+            2학년 편입: 교양 15 / 전공 15 / 합계 30<br>
+            3학년 편입: 교양 33 / 전공 30 / 합계 63
+          </div>
+        </div>
+
+        <div class="section-title">졸업요건 <span class="section-note">사회복지사 자격취득과 별개</span></div>
+        <ul class="req-list">
+          <li><span>총 취득학점</span><strong>130학점 이상</strong></li>
+          <li><span>교양</span><strong>24학점 이상</strong></li>
+          <li><span>전공</span><strong id="majorReqText">51학점 이상</strong></li>
+        </ul>
+
+        <div class="section-title">사회복지사 2급</div>
+        <ul class="req-list">
+          <li><span>필수과목</span><strong>10과목</strong></li>
+          <li><span>선택과목</span><strong>7과목</strong></li>
+        </ul>
+
+        <details open>
+          <summary>사용 방법</summary>
+          <div class="small" style="margin-top:8px">
+            1. 입학 구분을 선택합니다.<br>
+            2. 수강했거나 수강할 과목을 체크합니다.<br>
+            3. 과목 카드의 수강학기를 선택합니다.<br>
+            4. 상단 요약에서 졸업요건과 사회복지사 2급 과목 수를 확인합니다.<br>
+            5. 학기별 수강 현황에서 과목 배치가 과하지 않은지 확인합니다.<br><br>
+            ※ 건강가정사는 현재 해당 과목 표시 기준입니다.
+          </div>
+        </details>
+      </div>
+    </aside>
+
+    <section>
+      <div class="metrics">
+        <div class="metric" id="mTotal">
+          <div class="name">졸업 총학점</div>
+          <div class="value"><span id="totalCredits">0</span> / 130</div>
+          <div class="bar"><i id="barTotal"></i></div>
+        </div>
+        <div class="metric" id="mMajor">
+          <div class="name">전공 학점</div>
+          <div class="value"><span id="majorCredits">0</span> / <span id="majorReq">51</span></div>
+          <div class="bar"><i id="barMajor"></i></div>
+        </div>
+        <div class="metric" id="mGeneral">
+          <div class="name">교양 학점</div>
+          <div class="value"><span id="generalCredits">0</span> / 24</div>
+          <div class="bar"><i id="barGeneral"></i></div>
+        </div>
+      </div>
+
+      <div class="metrics two">
+        <div class="metric" id="mSwReq">
+          <div class="name">사회복지사 2급 필수</div>
+          <div class="value"><span id="swReqCount">0</span> / 10</div>
+          <div class="bar"><i id="barSwReq"></i></div>
+        </div>
+        <div class="metric" id="mSwEle">
+          <div class="name">사회복지사 2급 선택</div>
+          <div class="value"><span id="swEleCount">0</span> / 7</div>
+          <div class="bar"><i id="barSwEle"></i></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>학기별 수강 현황</h2>
+        <div class="card-body">
+          <div class="summary-legend">
+            <span class="tag req">2급 필수</span>
+            <span class="tag ele">2급 선택</span>
+            <span class="tag hf">건강가정사</span>
+            <span class="tag gen">교양</span>
+          </div>
+          <div id="termSummary" class="term-summary"></div>
+          <p class="footer-note">
+            과목 카드에서 “수강학기를 고르면 이 영역에 과목명으로 정리됩니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="course-select-title"><span>과목 선택</span><em>과목 정보 및 담당교수와 평가방식은 운영 시점에 따라 변경될 수 있습니다.</em></h2>
+        <div class="card-body">
+          <div class="toolbar hide-print">
+            <div class="searchbox">
+              <label for="search">과목 검색</label>
+              <input id="search" type="text" placeholder="예: 실천론, 출석, 건강가정사, 2학년" autocomplete="off" spellcheck="false">
+            </div>
+            <div class="row">
+              <button id="clearPlanBtn" type="button">수강학기 비우기</button>
+              <button id="clearBtn" type="button">전체 초기화</button>
+              <button onclick="window.print()" type="button">인쇄</button>
+            </div>
+          </div>
+
+          <div class="small hide-print" style="margin:4px 0 8px">필터는 중복 선택 가능합니다. 예: 교양 + 1학기</div>
+          <div class="filters hide-print" id="filters">
+            <button class="active" data-filter="all">전체</button>
+            <button data-filter="sem1">1학기</button>
+            <button data-filter="sem2">2학기</button>
+            <button data-filter="swReq">자격 필수</button>
+            <button data-filter="swEle">자격 선택</button>
+            <button data-filter="hf">건강가정사</button>
+            <button data-filter="att">출석수업</button>
+            <button data-filter="finalTask">기말 과제물</button>
+            <button data-filter="major">전공</button>
+            <button data-filter="general">교양</button>
+            <button data-filter="ilseon">일선</button>
+          </div>
+
+          <div id="courseGrid" class="course-grid"></div>
+          <div id="gridSpacer"></div>
+          <div id="emptyResult" class="empty" style="display:none">검색 결과가 없습니다.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+const courses = [
+  {sem:"공통", grade:"P", type:"교양", code:"00500", name:"원격대학교육의이해", eval:"-", finalEval:"-", credits:1, note:"성적 반영되지 않음 / 별도 중간·기말 평가 없음 / 이수 시 1학점"},
+  {sem:"2학기", grade:"P", type:"교양", code:"00501", name:"AI네이티브가되기위한기초소양", eval:"웹강의", finalEval:"-", credits:1, dept:"국어국문학과", note:"성적 반영되지 않음 / 별도 중간·기말 평가 없음 / 이수 시 1학점"},
+  {sem:"1학기", grade:1, type:"교양", code:"00174", name:"글쓰기", prof:"이상진 외", eval:"과제물", finalEval:"객관식", credits:3, book:"글쓰기", dept:"국어국문"},
+  {sem:"1학기", grade:1, type:"교양", code:"00103", name:"세계의역사", prof:"이우창", eval:"과제물", finalEval:"객관식", credits:3, book:"세계의역사", dept:"문화교양"},
+  {sem:"1학기", grade:1, type:"교양", code:"00175", name:"인간과언어", eval:"과제물", finalEval:"객관식", credits:3, dept:"영어영문학과", note:"기말: 객관식"},
+  {sem:"1학기", grade:1, type:"교양", code:"00231", name:"컴퓨터의이해", prof:"김강현 외", eval:"과제물", finalEval:"객관식", credits:3, book:"컴퓨터의이해", dept:"컴퓨터과학"},
+  {sem:"1학기", grade:1, type:"교양", code:"00202", name:"테마가있는음악여행", eval:"과제물", finalEval:"객관식", credits:3, dept:"유아교육과", note:"기말: 객관식"},
+  {sem:"1학기", grade:1, type:"전공", code:"28101", name:"나눔의 예술", prof:"김영애 외", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업+과제물 / 출석대체과제물", credits:3, book:"나눔의 예술", dept:"사회복지"},
+  {sem:"1학기", grade:1, type:"전공", code:"28106", name:"사회복지입문", prof:"유범상", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업+과제물 / 출석대체과제물", credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지"},
+  {sem:"1학기", grade:1, type:"전공", code:"28102", name:"시민론", prof:"인지훈", eval:"과제물", finalEval:"객관식", credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지"},
+  {sem:"1학기", grade:2, type:"교양", code:"00302", name:"도시웰빙농업", eval:"과제물", finalEval:"과제물(온라인)", credits:3, dept:"도시콘텐츠·관광학과", note:"기말: 과제물"},
+  {sem:"1학기", grade:2, type:"교양", code:"00371", name:"동서양고전의이해", prof:"-", eval:"과제물", finalEval:"과제물(온라인)", credits:3, book:"동서양고전의이해", dept:"문화교양"},
+  {sem:"1학기", grade:2, type:"교양", code:"37351", name:"생활과 건강", prof:"박영숙 외", eval:"과제물", finalEval:"객관식", credits:3, book:"생활과건강", dept:"간호"},
+  {sem:"1학기", grade:2, type:"교양", code:"00272", name:"세계의정치와경제", prof:"김재형", eval:"과제물", finalEval:"과제물(온라인)", credits:3, book:"세계의정치와경제", dept:"문화교양"},
+  {sem:"1학기", grade:2, type:"교양", code:"00303", name:"숫자로이해하는기업과사회", eval:"과제물", finalEval:"과제물(온라인)", credits:3, dept:"통계·데이터과학과", note:"기말: 과제물"},
+  {sem:"1학기", grade:2, type:"교양", code:"00207", name:"한국사의이해", eval:"과제물", finalEval:"객관식", credits:3, dept:"영어영문학과", note:"기말: 객관식"},
+  {sem:"1학기", grade:2, type:"교양", code:"00203", name:"환경과건강", eval:"과제물", finalEval:"객관식", credits:3, dept:"행정학과", note:"기말: 객관식"},
+  {sem:"1학기", grade:2, type:"전공", code:"28401", name:"빈곤론", prof:"이현숙", eval:"과제물", finalEval:"객관식", sw:"선택", credits:3, book:"빈곤론", dept:"사회복지"},
+  {sem:"1학기", grade:2, type:"전공", code:"28302", name:"사회복지역사", prof:"인지훈", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업+과제물 / 출석대체과제물", sw:"선택", credits:3, book:"U-KNOU캠퍼스 보충학습자료", dept:"사회복지"},
+  {sem:"1학기", grade:2, type:"전공", code:"28303", name:"장애인복지론", prof:"김영애", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업+과제물 / 출석대체과제물", sw:"선택", hf:true, credits:3, book:"장애인복지론", dept:"사회복지"},
+  {sem:"1학기", grade:2, type:"일선", code:"41370", name:"학교사회복지론", prof:"김영빈", eval:"과제물", finalEval:"객관식", sw:"선택", credits:3, book:"학교사회복지론", dept:"교육"},
+  {sem:"1학기", grade:3, type:"전공", code:"28357", name:"분배와평등", prof:"인지훈", eval:"과제물", finalEval:"객관식", credits:3, book:"U-KNOU캠퍼스 강의록", dept:"사회복지"},
+  {sem:"1학기", grade:3, type:"전공", code:"28301", name:"사회복지법제와실천", prof:"김영애", eval:"과제물", finalEval:"객관식", sw:"필수", credits:3, book:"사회복지법제와실천", dept:"사회복지"},
+  {sem:"1학기", grade:3, type:"전공", code:"28305", name:"사회복지와인권", prof:"이현숙", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업+과제물 / 출석대체과제물", sw:"선택", credits:3, book:"사회복지와인권", dept:"사회복지"},
+  {sem:"1학기", grade:3, type:"전공", code:"28201", name:"사회복지윤리와 철학", prof:"인지훈", eval:"과제물", finalEval:"객관식", sw:"선택", credits:3, book:"U-KNOU캠퍼스 강의록", dept:"사회복지"},
+  {sem:"1학기", grade:3, type:"전공", code:"22152", name:"사회복지학개론", prof:"유범상", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업+과제물 / 출석대체과제물", sw:"필수", hf:true, credits:3, book:"사회복지학개론", dept:"사회복지"},
+  {sem:"1학기", grade:3, type:"전공", code:"28355", name:"산업복지론", prof:"강상준", eval:"과제물", finalEval:"객관식", sw:"선택", credits:3, book:"산업복지론", dept:"사회복지"},
+  {sem:"1학기", grade:3, type:"전공", code:"28304", name:"프로그램개발과평가", prof:"박미진", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, credits:3, book:"U-KNOU캠퍼스 강의록", dept:"사회복지"},
+  {sem:"1학기", grade:4, type:"전공", code:"22355", name:"사회복지실천기술론", prof:"강상준", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업+과제물 / 출석대체과제물", sw:"필수", hf:true, credits:3, book:"사회복지실천기술론", dept:"사회복지"},
+  {sem:"1학기", grade:4, type:"전공", code:"22474", name:"사회복지현장실습", prof:"강상준", eval:"-", sw:"필수", credits:3, book:"-", dept:"사회복지"},
+  {sem:"1학기", grade:4, type:"전공", code:"28356", name:"후배시민론", prof:"이현숙", eval:"과제물", finalEval:"객관식", credits:3, book:"후배시민론", dept:"사회복지"},
+  {sem:"1학기", grade:4, type:"일선", code:"22563", name:"사회복지행정론", prof:"김영애 외", eval:"과제물", finalEval:"객관식", sw:"필수", hf:true, credits:3, book:"사회복지행정론", dept:"행정"},
+  {sem:"1학기", grade:4, type:"일선", name:"자연자원의이해", prof:"장호찬", eval:"과제물", finalEval:"객관식", credits:3, book:"자연자원의이해", dept:"관광"},
+  {sem:"2학기", grade:1, type:"교양", code:"00171", name:"대학영어", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"대학영어", dept:"국어국문학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:1, type:"교양", code:"00126", name:"문학의이해", prof:"김신정", eval:"과제물", finalEval:"객관식", credits:3, book:"문학의이해", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:1, type:"교양", code:"00301", name:"세대와 소통", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"세대와소통", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:1, type:"교양", code:"00173", name:"심리학에게묻다", prof:"-", eval:"과제물", finalEval:"과제물(온라인)", credits:3, book:"심리학에게묻다", dept:"국어국문학과", note:"기말: 과제물(온라인)"},
+  {sem:"2학기", grade:1, type:"교양", code:"00107", name:"푸드리터러시와식생활", eval:"과제물", finalEval:"객관식", credits:3, dept:"법학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:1, type:"전공", code:"28104", name:"돌봄과노동", prof:"박미진", eval:"과제물", finalEval:"객관식", credits:3, book:"돌봄과노동", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:1, type:"전공", code:"28351", name:"사회복지정의론", prof:"유범상", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", credits:3, book:"사회복지정의론", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:1, type:"전공", code:"28105", name:"사회복지학적상상력", prof:"박정민", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", credits:3, book:"사회복지학적상상력", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:1, type:"일선", code:"41151", name:"인간행동과사회환경", prof:"전영욱", eval:"과제물", finalEval:"객관식", sw:"필수", hf:true, credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:2, type:"교양", code:"43211", name:"경제학의이해", prof:"이남형", eval:"과제물", finalEval:"객관식", credits:3, book:"경제학의 이해", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:2, type:"교양", code:"00201", name:"대학수학의이해", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"대학수학의이해", dept:"행정학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:2, type:"교양", code:"00125", name:"인간과사회", prof:"김재형", eval:"과제물", finalEval:"과제물(온라인)", credits:3, book:"인간과사회", dept:"사회복지학과", note:"기말: 과제물(온라인)"},
+  {sem:"2학기", grade:2, type:"교양", code:"00106", name:"철학의이해", prof:"-", eval:"과제물", finalEval:"과제물(온라인)", credits:3, book:"철학의이해", dept:"국어국문학과", note:"기말: 과제물(온라인)"},
+  {sem:"2학기", grade:2, type:"교양", code:"00273", name:"취미와예술", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"취미와예술", dept:"국어국문학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:2, type:"전공", code:"28454", name:"사회복지와문화다양성", prof:"이현숙", eval:"과제물", finalEval:"객관식", sw:"선택", credits:3, book:"사회복지와 문화다양성", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:2, type:"전공", code:"22206", name:"사회복지정책론", prof:"문병기·김영애", eval:"과제물", finalEval:"객관식", sw:"필수", credits:3, book:"사회복지정책론", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:2, type:"전공", code:"28202", name:"여성복지론", prof:"박미진", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, credits:3, book:"여성복지론", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:2, type:"전공", code:"33392", name:"지역사회복지론", prof:"강상준", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", sw:"필수", hf:true, credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:3, type:"교양", code:"21151", name:"생활법률", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"생활법률", dept:"국어국문학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:3, type:"교양", code:"00372", name:"인간과교육", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"인간과교육", dept:"국어국문학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:3, type:"전공", code:"28450", name:"사례관리론", prof:"이현숙", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, credits:3, book:"사례관리론", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:3, type:"전공", code:"00471", name:"사회문제론", prof:"박정민", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", sw:"선택", credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:3, type:"전공", code:"45402", name:"사회복지실천론", prof:"서정원", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", sw:"필수", hf:true, credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:3, type:"전공", code:"41464", name:"사회복지조사론", prof:"김영애", eval:"과제물", finalEval:"객관식", sw:"필수", credits:3, book:"사회복지조사론", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:3, type:"전공", code:"28103", name:"선배시민론", prof:"유범상·이현숙", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", credits:3, book:"선배시민론", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:3, type:"전공", code:"28306", name:"시민운동과NGO", prof:"박정민", eval:"과제물", finalEval:"객관식", credits:3, book:"시민운동과NGO", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:4, type:"교양", code:"43312", name:"성,사랑,사회", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"성/사랑/사회", dept:"국어국문학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:4, type:"교양", code:"00476", name:"이슈로보는오늘날의유럽", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"이슈로보는오늘날의유럽", dept:"영어영문학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:4, type:"전공", code:"28452", name:"사회복지시설과사회적경제", prof:"김영애", eval:"과제물", finalEval:"객관식", credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:4, type:"전공", code:"28451", name:"사회복지정치학", prof:"유범상", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", credits:3, book:"사회복지정치학", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:4, type:"전공", code:"22474", name:"사회복지현장실습", prof:"강상준", eval:"실험실습", sw:"필수", credits:3, book:"-", dept:"사회복지학과"},
+  {sem:"2학기", grade:4, type:"일선", code:"22421", name:"공공협치론", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업유형: 대면수업 / 대체: 대체시험", credits:3, dept:"행정학과", note:"행정학과 전공 / 사회복지학과 기준 일선 / 기말: 객관식"},
+  {sem:"2학기", grade:4, type:"일선", code:"33421", name:"노인복지론", prof:"성미애·이현숙", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, credits:3, book:"노인복지론", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:4, type:"일선", code:"46307", name:"노인체육론", prof:"박상현", eval:"과제물", finalEval:"객관식", credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:4, type:"일선", code:"41356", name:"문화와교육", prof:"윤여각", eval:"과제물", finalEval:"객관식", credits:3, book:"문화와교육", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"기타", grade:0, type:"일선", code:"33354", name:"가족과문화", prof:"-", eval:"과제물", finalEval:"객관식", hf:true, credits:3, book:"-", dept:"생활과학부", note:"사회복지학과 개설 과목 아님"},
+  {sem:"기타", grade:0, type:"일선", code:"33418", name:"가족복지론", prof:"-", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, credits:3, book:"-", dept:"생활과학부", note:"사회복지학과 개설 과목 아님"},
+  {sem:"기타", grade:0, type:"일선", code:"33471", name:"가족상담 및 치료", prof:"-", eval:"과제물", finalEval:"객관식", hf:true, credits:3, book:"-", dept:"생활과학부", note:"사회복지학과 개설 과목 아님"},
+  {sem:"기타", grade:0, type:"일선", code:"33490", name:"가족생활교육", prof:"-", eval:"과제물", finalEval:"객관식", hf:true, credits:3, book:"-", dept:"생활과학부", note:"사회복지학과 개설 과목 아님"},
+  {sem:"기타", grade:0, type:"일선", code:"42152", name:"정신건강론", prof:"-", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, credits:3, book:"-", dept:"유아교육과", note:"사회복지학과 개설 과목 아님"},
+].map((c, idx)=>({id:idx+1, credits:3, sw:c.sw||"", hf:!!c.hf, attendanceHours:c.attendanceHours||0, finalEval:c.finalEval||"", detail:c.detail||"", note:c.note||"", ...c}));
+
+const admissionData = {
+  fresh_spring:{label:"1학년 신입학 · 1학기", entryGrade:1, entrySem:1, minTerms:8, rec:{gen:0, major:0, total:0}, majorReq:51},
+  fresh_fall:{label:"1학년 신입학 · 2학기", entryGrade:1, entrySem:2, minTerms:8, rec:{gen:0, major:0, total:0}, majorReq:51},
+  tr2_spring:{label:"2학년 편입학 · 1학기", entryGrade:2, entrySem:1, minTerms:6, rec:{gen:15, major:15, total:30}, majorReq:60},
+  tr2_fall:{label:"2학년 편입학 · 2학기", entryGrade:2, entrySem:2, minTerms:6, rec:{gen:15, major:15, total:30}, majorReq:60},
+  tr3_spring:{label:"3학년 편입학 · 1학기", entryGrade:3, entrySem:1, minTerms:4, rec:{gen:33, major:30, total:63}, majorReq:69},
+  tr3_fall:{label:"3학년 편입학 · 2학기", entryGrade:3, entrySem:2, minTerms:4, rec:{gen:33, major:30, total:63}, majorReq:69}
+};
+
+const STORAGE_KEY = "social_welfare_sugang_v4";
+const activeFilters = new Set();
+const selected = new Set();
+const planTerm = {};
+
+const el = id => document.getElementById(id);
+
+function saveState(){
+  try{
+    const state = {
+      admission: el("admission").value,
+      selected: [...selected],
+      planTerm
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }catch(e){
+    console.warn("자동저장을 사용할 수 없습니다.", e);
+  }
+}
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const state = JSON.parse(raw);
+    if(state.admission && admissionData[state.admission]) el("admission").value = state.admission;
+    if(Array.isArray(state.selected)) state.selected.forEach(id => selected.add(Number(id)));
+    if(state.planTerm) Object.assign(planTerm, state.planTerm);
+  }catch(e){}
+}
+function getTerms(){
+  const data = admissionData[el("admission").value];
+  const terms = [];
+  const seen = new Set();
+  for(let i=0;i<data.minTerms;i++){
+    const n = data.entrySem - 1 + i;
+    const grade = data.entryGrade + Math.floor(n / 2);
+    const sem = (n % 2) + 1;
+    if(grade > 4) continue;
+    const label = `${grade}학년 ${sem}학기`;
+    const key = `G${grade}S${sem}`;
+    if(!seen.has(key)){
+      terms.push({key, label, actual:"정규수강"});
+      seen.add(key);
+    }
+  }
+  terms.push({key:"extra", label:"추가수강", actual:"졸업유예·보충"});
+  return terms;
+}
+function termLabel(key){
+  const t = getTerms().find(x=>x.key===key);
+  return t ? t.label : "";
+}
+function courseOpenTerm(c){
+  if(c.grade === "P") return "P";
+  if(c.grade === 0) return "기타";
+  return `${c.grade}학년 ${c.sem}`;
+}
+function typeTag(type){
+  if(type === "전공") return '<span class="tag major">전공</span>';
+  if(type === "교양") return '<span class="tag gen">교양</span>';
+  return '<span class="tag ilseon">일선</span>';
+}
+function swTag(sw){
+  if(sw === "필수") return '<span class="tag req">자격 필수</span>';
+  if(sw === "선택") return '<span class="tag ele">자격 선택</span>';
+  return '';
+}
+function hfTag(c){
+  return c.hf ? '<span class="tag hf">건강가정사</span>' : '';
+}
+function evalTag(c){
+  if(c.eval === "출석") return `<span class="tag att">출석(${c.attendanceHours || 3}시간)</span>`;
+  if(c.eval === "-") return '<span class="tag none">중간평가 없음</span>';
+  if(c.eval === "과제물") return '<span class="tag none">과제물</span>';
+  if(c.eval === "실험실습") return '<span class="tag none">실험실습</span>';
+  if(c.eval === "웹강의") return '<span class="tag none">웹강의</span>';
+  return `<span class="tag none">${c.eval || "중간평가 없음"}</span>`;
+}
+function finalTag(c){
+  if(!c.finalEval || c.finalEval === "-") return '';
+  if(String(c.finalEval).includes('과제물')) return '<span class="tag final">기말 과제물</span>';
+  return `<span class="tag none">기말 ${c.finalEval}</span>`;
+}
+function oneFilterMatch(c, filter){
+  if(filter === "sem1") return c.sem === "1학기";
+  if(filter === "sem2") return c.sem === "2학기";
+  if(filter === "swReq") return c.sw === "필수";
+  if(filter === "swEle") return c.sw === "선택";
+  if(filter === "hf") return c.hf;
+  if(filter === "att") return c.eval === "출석";
+  if(filter === "finalTask" || filter === "finalReport") return String(c.finalEval || "").includes("과제물");
+  if(filter === "major") return c.type === "전공";
+  if(filter === "general") return c.type === "교양";
+  if(filter === "ilseon") return c.type === "일선";
+  return true;
+}
+function matchFilter(c){
+  if(activeFilters.size === 0) return true;
+  return [...activeFilters].every(filter => oneFilterMatch(c, filter));
+}
+function autoPlanTermForCourse(c){
+  const terms = getTerms();
+  const target = `${c.grade}학년 ${c.sem}`;
+  const found = terms.find(t => t.label === target);
+  return found ? found.key : "";
+}
+function renderCourseGrid(){
+  const grid = el("courseGrid");
+  const empty = el("emptyResult");
+  const keyword = el("search").value.trim().toLowerCase();
+  grid.innerHTML = "";
+
+  const list = courses
+    .filter(c => matchFilter(c))
+    .filter(c => {
+      if(!keyword) return true;
+      const hay = [
+        c.sem, c.grade === "P" ? "P" : (c.grade ? `${c.grade}학년` : "기타"), c.type, c.code, c.name, c.prof,
+        c.eval, c.finalEval, c.finalEval && String(c.finalEval).includes("과제물") ? "기말과제물" : "", c.attendanceHours ? `${c.attendanceHours}시간` : "",
+        c.sw, c.hf ? "건강가정사" : "", c.book, c.dept, c.note, termLabel(planTerm[c.id])
+      ].join(" ").toLowerCase();
+      return hay.includes(keyword);
+    });
+
+  list.forEach(c => {
+    const checked = selected.has(c.id);
+    const card = document.createElement("div");
+    card.className = `course-card ${checked ? "checked" : ""}`;
+    card.innerHTML = `
+      <div class="course-top">
+        <div>
+          <h3 class="course-title">${c.name}</h3>
+          <div class="course-meta">${courseOpenTerm(c)} · ${c.code || "코드 없음"}</div>
+        </div>
+        <input class="check" type="checkbox" data-id="${c.id}" ${checked ? "checked" : ""} title="수강 체크">
+      </div>
+      <div class="badge-row">
+        ${typeTag(c.type)}
+        ${swTag(c.sw)}
+        ${hfTag(c)}
+        ${evalTag(c)}
+        ${finalTag(c)}
+      </div>
+      <div class="info">
+        <div><span>담당교수</span><span>${c.prof || "-"}</span></div>
+        <div><span>중간평가</span><span>${c.eval === "출석" ? `출석(${c.attendanceHours || 3}시간)` : c.eval}</span></div>
+        <div><span>기말시험</span><span>${c.finalEval || "-"}</span></div>
+        <div><span>관리학과</span><span>${c.dept || "-"}</span></div>
+      </div>
+      ${c.detail || c.note || (c.finalEval && String(c.finalEval).includes("과제물")) ? `<div class="note">${c.detail ? "출석수업: " + c.detail : ""}${c.detail && (c.note || (c.finalEval && String(c.finalEval).includes("과제물"))) ? "<br>" : ""}${c.note ? "비고: " + c.note : ""}${c.note && (c.finalEval && String(c.finalEval).includes("과제물")) ? "<br>" : ""}${c.finalEval && String(c.finalEval).includes("과제물") ? "기말: 과제물" : ""}</div>` : ""}
+      <div class="select-area">
+        <label>수강학기</label>
+        <select class="term-select" data-id="${c.id}">
+          <option value="">미지정</option>
+          ${getTerms().map(t => `<option value="${t.key}" ${planTerm[c.id]===t.key ? "selected" : ""}>${t.label}</option>`).join("")}
+        </select>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  empty.style.display = list.length ? "none" : "block";
+
+  document.querySelectorAll(".check").forEach(chk => {
+    chk.addEventListener("change", e => {
+      const id = Number(e.target.dataset.id);
+      const c = courses.find(x=>x.id===id);
+      if(e.target.checked){
+        selected.add(id);
+        if(!planTerm[id]){
+          planTerm[id] = autoPlanTermForCourse(c) || "extra";
+        }
+      }else{
+        selected.delete(id);
+      }
+      renderAll(true);
+    });
+  });
+
+  document.querySelectorAll(".term-select").forEach(sel => {
+    sel.addEventListener("change", e => {
+      const id = Number(e.target.dataset.id);
+      planTerm[id] = e.target.value;
+      if(e.target.value) selected.add(id);
+      renderAll(true);
+    });
+  });
+}
+
+let searchLockHeight = 0;
+function renderCourseGridKeepScroll(){
+  const x = window.scrollX;
+  const y = window.scrollY;
+  const grid = el("courseGrid");
+  const spacer = el("gridSpacer");
+  const query = el("search").value.trim();
+
+  const beforeHeight = grid ? grid.offsetHeight : 0;
+  if(query){
+    searchLockHeight = Math.max(searchLockHeight, beforeHeight);
+  }else{
+    searchLockHeight = 0;
+    if(spacer) spacer.style.height = "0px";
+  }
+
+  renderCourseGrid();
+
+  if(query && grid && spacer){
+    const afterHeight = grid.offsetHeight || 0;
+    const keepHeight = Math.max(searchLockHeight, afterHeight);
+    spacer.style.height = Math.max(0, keepHeight - afterHeight) + "px";
+    searchLockHeight = keepHeight;
+  }
+
+  window.scrollTo(x, y);
+  requestAnimationFrame(() => window.scrollTo(x, y));
+}
+
+function selectedCourses(){
+  return courses.filter(c => selected.has(c.id));
+}
+function setBar(id, value, max){
+  const pct = Math.max(0, Math.min(100, (value / max) * 100));
+  el(id).style.width = pct + "%";
+}
+function setMetricState(id, ok, warn=false){
+  const m = el(id);
+  m.classList.remove("ok","bad","warn");
+  m.classList.add(ok ? "ok" : (warn ? "warn" : "bad"));
+}
+function getGroupedByTerm(){
+  const groups = {};
+  getTerms().forEach(t => groups[t.key] = []);
+  groups.unset = [];
+  selectedCourses().forEach(c => {
+    const key = planTerm[c.id] || "unset";
+    if(!groups[key]) groups[key] = [];
+    groups[key].push(c);
+  });
+  return groups;
+}
+function termCategoryClass(c){
+  if(c.sw === "필수") return "req";
+  if(c.sw === "선택") return "ele";
+  if(c.hf) return "hf";
+  if(c.type === "교양") return "gen";
+  return "default";
+}
+function termCategoryLabel(c){
+  const labels = [];
+  if(c.sw === "필수") labels.push("필수");
+  if(c.sw === "선택") labels.push("선택");
+  if(c.hf) labels.push("건가");
+  if(c.type === "교양") labels.push("교양");
+  return labels.length ? labels.join("·") : c.type;
+}
+function renderTermSummary(){
+  const wrap = el("termSummary");
+  const terms = getTerms();
+  const groups = getGroupedByTerm();
+  wrap.innerHTML = "";
+
+  terms.forEach(t => {
+    const list = groups[t.key] || [];
+    const names = list
+      .map(c=>`<span class="pill ${termCategoryClass(c)}"><span>${c.name}</span><em>${termCategoryLabel(c)}</em></span>`)
+      .join("");
+
+    const div = document.createElement("div");
+    div.className = `term-card ${list.length ? "has" : ""}`;
+    div.innerHTML = `
+      <div class="term-head">
+        <div>
+          <div class="term-title">${t.label}</div>
+          <div class="term-sub">${t.actual}</div>
+        </div>
+        <div class="term-num">${list.length}과목</div>
+      </div>
+      <div class="course-pills">${names || '<span class="small">배정 과목 없음</span>'}</div>
+    `;
+    wrap.appendChild(div);
+  });
+
+  const unset = groups.unset || [];
+  if(unset.length){
+    const div = document.createElement("div");
+    div.className = "term-card has";
+    div.innerHTML = `
+      <div class="term-head">
+        <div>
+          <div class="term-title">미지정</div>
+          <div class="term-sub">체크했지만 수강학기 없음</div>
+        </div>
+        <div class="term-num">${unset.length}과목</div>
+      </div>
+      <div class="course-pills">
+        ${unset.map(c=>`<span class="pill ${termCategoryClass(c)}"><span>${c.name}</span><em>${termCategoryLabel(c)}</em></span>`).join("")}
+      </div>
+    `;
+    wrap.appendChild(div);
+  }
+}
+
+function updateSummary(){
+  const data = admissionData[el("admission").value];
+  const recGen = Number(el("recGen").value || 0);
+  const recMajor = Number(el("recMajor").value || 0);
+  const recTotal = Number(el("recTotal").value || 0);
+  const majorReq = data.majorReq;
+
+  const sel = selectedCourses();
+  const majorSel = sel.filter(c=>c.type==="전공").reduce((s,c)=>s+c.credits,0);
+  const genSel = sel.filter(c=>c.type==="교양").reduce((s,c)=>s+c.credits,0);
+  const totalSel = sel.reduce((s,c)=>s+c.credits,0);
+
+  const total = recTotal + totalSel;
+  const major = recMajor + majorSel;
+  const general = recGen + genSel;
+
+  const swReq = sel.filter(c=>c.sw==="필수").length;
+  const swEle = sel.filter(c=>c.sw==="선택").length;
+  el("totalCredits").textContent = total;
+  el("majorCredits").textContent = major;
+  el("generalCredits").textContent = general;
+  el("majorReq").textContent = majorReq;
+  el("majorReqText").textContent = `${majorReq}학점 이상`;
+  el("swReqCount").textContent = swReq;
+  el("swEleCount").textContent = swEle;
+
+  setBar("barTotal", total, 130);
+  setBar("barMajor", major, majorReq);
+  setBar("barGeneral", general, 24);
+  setBar("barSwReq", swReq, 10);
+  setBar("barSwEle", swEle, 7);
+
+  setMetricState("mTotal", total >= 130, total >= 120);
+  setMetricState("mMajor", major >= majorReq, major >= majorReq - 9);
+  setMetricState("mGeneral", general >= 24, general >= 18);
+  setMetricState("mSwReq", swReq >= 10, swReq >= 8);
+  setMetricState("mSwEle", swEle >= 7, swEle >= 5);
+}
+function cleanInvalidTerms(){
+  const keys = getTerms().map(t=>t.key);
+  Object.keys(planTerm).forEach(id => {
+    if(planTerm[id] && !keys.includes(planTerm[id])) planTerm[id] = "";
+  });
+}
+function applyAdmissionDefaults(){
+  const data = admissionData[el("admission").value];
+  el("recGen").value = data.rec.gen;
+  el("recMajor").value = data.rec.major;
+  el("recTotal").value = data.rec.total;
+  cleanInvalidTerms();
+  renderAll();
+}
+function renderAll(doSave=true){
+  renderTermSummary();
+  renderCourseGrid();
+  updateSummary();
+  if(doSave) saveState();
+}
+function init(){
+  loadState();
+  const data = admissionData[el("admission").value];
+  el("recGen").value = data.rec.gen;
+  el("recMajor").value = data.rec.major;
+  el("recTotal").value = data.rec.total;
+  cleanInvalidTerms();
+  renderAll(false);
+
+  el("admission").addEventListener("change", () => {
+    applyAdmissionDefaults();
+    saveState();
+  });
+  ["recGen","recMajor","recTotal"].forEach(id => {
+    el(id).addEventListener("input", () => {
+      renderAll();
+    });
+  });
+  el("search").addEventListener("input", () => renderCourseGridKeepScroll());
+  el("clearBtn").addEventListener("click", () => {
+    selected.clear();
+    Object.keys(planTerm).forEach(k=>delete planTerm[k]);
+    localStorage.removeItem(STORAGE_KEY);
+    const spacer = el("gridSpacer");
+    if(spacer) spacer.style.height = "0px";
+    searchLockHeight = 0;
+    renderAll(false);
+  });
+  el("clearPlanBtn").addEventListener("click", () => {
+    Object.keys(planTerm).forEach(k=>planTerm[k]="");
+    renderAll();
+  });
+  document.querySelectorAll("#filters button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter;
+      const allBtn = document.querySelector('#filters button[data-filter="all"]');
+
+      if(filter === "all"){
+        activeFilters.clear();
+      }else{
+        if(activeFilters.has(filter)) activeFilters.delete(filter);
+        else activeFilters.add(filter);
+      }
+
+      document.querySelectorAll("#filters button").forEach(b => {
+        const f = b.dataset.filter;
+        b.classList.toggle("active", f !== "all" && activeFilters.has(f));
+      });
+
+      if(allBtn) allBtn.classList.toggle("active", activeFilters.size === 0);
+
+      searchLockHeight = 0;
+      const spacer = el("gridSpacer");
+      if(spacer) spacer.style.height = "0px";
+      renderCourseGrid();
+    });
+  });
+}
+init();
+</script>
+</body>
+</html>
