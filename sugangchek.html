@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>사회복지학과 수강신청 체크표 v29</title>
+  <title>사회복지학과 수강신청 체크표 20260720</title>
   <style>
     :root{
       --bg:#f5f7fb;
@@ -144,6 +144,41 @@
     .metrics.two{
       grid-template-columns:repeat(2,1fr);
     }
+    .hf-summary{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .hf-card{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:14px;
+      padding:12px;
+    }
+    .hf-card.ok{
+      border-color:#a7f3d0;
+      background:#ecfdf5;
+    }
+    .hf-card .name{
+      font-size:12px;
+      color:#6b7280;
+      font-weight:800;
+    }
+    .hf-card .value{
+      font-size:20px;
+      font-weight:900;
+      margin-top:3px;
+    }
+    .hf-card .subjects{
+      margin-top:6px;
+      font-size:11px;
+      color:#6b7280;
+      line-height:1.35;
+    }
+    @media (max-width:760px){
+      .hf-summary{grid-template-columns:1fr}
+    }
     @media (max-width:760px){
       .metrics{grid-template-columns:1fr}
       .inline{grid-template-columns:1fr}
@@ -228,6 +263,11 @@
     .tag.req{color:var(--red);background:var(--red-bg)}
     .tag.ele{color:var(--blue);background:var(--blue-bg)}
     .tag.hf{color:var(--green);background:var(--green-bg)}
+
+    .tag.hf-core{color:#166534;background:#dcfce7;border:1px solid #86efac}
+    .tag.hf-basic{color:#92400e;background:#fef3c7;border:1px solid #fde68a}
+    .tag.hf-practice{color:#9d174d;background:#fce7f3;border:1px solid #fbcfe8}
+
     .tag.major{color:#3730a3;background:#eef2ff}
     .tag.gen{color:#475569;background:#f1f5f9}
     .tag.ilseon{color:#92400e;background:#fffbeb}
@@ -334,6 +374,9 @@
     .pill.req{background:#fef2f2;color:#991b1b}
     .pill.ele{background:#eff6ff;color:#1d4ed8}
     .pill.hf{background:#ecfdf5;color:#047857}
+    .pill.hf-core{background:#dcfce7;color:#166534}
+    .pill.hf-basic{background:#fef3c7;color:#92400e}
+    .pill.hf-practice{background:#fce7f3;color:#9d174d}
     .pill.gen{background:#f1f5f9;color:#334155}
     .pill.default{background:#f3f4f6;color:#374151}
     .summary-legend{
@@ -615,6 +658,53 @@
         display:none!important;
       }
     }
+      /* pill-color-fix-v31 */
+
+    .pill.req{background:#fef2f2!important;color:#991b1b!important;border:1px solid #fecaca}
+    .pill.ele{background:#eff6ff!important;color:#1d4ed8!important;border:1px solid #bfdbfe}
+    .pill.hf{background:#ecfdf5!important;color:#047857!important;border:1px solid #a7f3d0}
+    .pill.hf-core{background:#dcfce7!important;color:#166534!important;border:1px solid #86efac}
+    .pill.hf-basic{background:#fef3c7!important;color:#92400e!important;border:1px solid #fde68a}
+    .pill.hf-practice{background:#fce7f3!important;color:#9d174d!important;border:1px solid #fbcfe8}
+    .pill.gen{background:#f1f5f9!important;color:#334155!important;border:1px solid #cbd5e1}
+    .pill.default{background:#f3f4f6!important;color:#374151!important;border:1px solid #d1d5db}
+
+  
+    /* health-family-green-unify-v33 */
+    .hf-card{
+      border-color:#a7f3d0!important;
+      background:#ecfdf5!important;
+    }
+    .hf-card.ok{
+      border-color:#a7f3d0!important;
+      background:#ecfdf5!important;
+    }
+    .tag.hf-core,
+    .tag.hf-basic,
+    .tag.hf-practice{
+      color:#047857!important;
+      background:#ecfdf5!important;
+      border:1px solid #a7f3d0!important;
+    }
+    .pill.hf-core,
+    .pill.hf-basic,
+    .pill.hf-practice{
+      background:#ecfdf5!important;
+      color:#047857!important;
+      border:1px solid #a7f3d0!important;
+    }
+
+  
+    /* health-family-status-color-v34 */
+    .hf-card{
+      border-color:#bfdbfe!important;
+      background:#eff6ff!important;
+    }
+    .hf-card.ok{
+      border-color:#a7f3d0!important;
+      background:#ecfdf5!important;
+    }
+
   </style>
   <meta name="seoul-sabok-credit" content="서울사복">
 </head>
@@ -623,7 +713,7 @@
 <!-- 내부 식별 표기: 서울사복 -->
 <header>
   <div class="wrap">
-    <h1>사회복지학과 수강신청 체크표</h1>
+    <h1>사회복지학과 수강신청 체크표 ver. 20260720</h1>
     <div class="copyright-note">© 한국방송통신대학교 서울지역대학 사회복지학과 제9대 학생회 | 무단 수정·재배포 금지 | 서울사복학생회카페 <a href="https://cafe.daum.net/Ksocialwelfare" target="_blank" rel="noopener">https://cafe.daum.net/Ksocialwelfare</a></div>
     <div class="notice">
       <p><span class="important">최종 수강신청 전에는 반드시 학교 공지와 학과 안내를 함께 확인해 주세요.</span></p>
@@ -685,6 +775,13 @@
           <li><span>선택과목</span><strong>7과목</strong></li>
         </ul>
 
+        <div class="section-title">건강가정사</div>
+        <ul class="req-list">
+          <li><span>핵심과목</span><strong>5과목</strong></li>
+          <li><span>기초이론</span><strong>4과목</strong></li>
+          <li><span>상담·교육 등 실제</span><strong>3과목</strong></li>
+        </ul>
+
         <details open>
           <summary>사용 방법</summary>
           <div class="small" style="margin-top:8px">
@@ -693,7 +790,7 @@
             3. 과목 카드의 수강학기를 선택합니다.<br>
             4. 상단 요약에서 졸업요건과 사회복지사 2급 과목 수를 확인합니다.<br>
             5. 학기별 수강 현황에서 과목 배치가 과하지 않은지 확인합니다.<br><br>
-            ※ 건강가정사는 현재 해당 과목 표시 기준입니다.
+            ※ 건강가정사 자격요건을 갖춘 자에게 자격증(또는 인증서) 등은 발급되고 있지 않으며, 취업이나 기타 사유로 확인이 필요할 경우 성적증명서와 졸업증명서를 해당기관 취업처 등)에 제출하시면 됩니다.
           </div>
         </details>
       </div>
@@ -731,18 +828,38 @@
         </div>
       </div>
 
+      <div class="hf-summary">
+        <div class="hf-card" id="mHfCore">
+          <div class="name">건강가정사 핵심</div>
+          <div class="value"><span id="hfCoreCount">0</span> / 5</div>
+          <div class="subjects" id="hfCoreSubjects">선택 과목 없음</div>
+        </div>
+        <div class="hf-card" id="mHfBasic">
+          <div class="name">건강가정사 기초</div>
+          <div class="value"><span id="hfBasicCount">0</span> / 4</div>
+          <div class="subjects" id="hfBasicSubjects">선택 과목 없음</div>
+        </div>
+        <div class="hf-card" id="mHfPractice">
+          <div class="name">건강가정사 실제</div>
+          <div class="value"><span id="hfPracticeCount">0</span> / 3</div>
+          <div class="subjects" id="hfPracticeSubjects">선택 과목 없음</div>
+        </div>
+      </div>
+
       <div class="card">
         <h2>학기별 수강 현황</h2>
         <div class="card-body">
           <div class="summary-legend">
             <span class="tag req">2급 필수</span>
             <span class="tag ele">2급 선택</span>
-            <span class="tag hf">건강가정사</span>
+            <span class="tag hf-core">건강가정사 핵심</span>
+            <span class="tag hf-basic">건강가정사 기초</span>
+            <span class="tag hf-practice">건강가정사 실제</span>
             <span class="tag gen">교양</span>
           </div>
           <div id="termSummary" class="term-summary"></div>
           <p class="footer-note">
-            과목 카드에서 “수강학기를 고르면 이 영역에 과목명으로 정리됩니다.
+            과목 카드에서 수강학기를 고르면 이 영역에 과목명으로 정리됩니다.
           </p>
         </div>
       </div>
@@ -807,19 +924,19 @@ const courses = [
   {sem:"1학기", grade:2, type:"교양", code:"00203", name:"환경과건강", eval:"과제물", finalEval:"객관식", credits:3, dept:"행정학과", note:"기말: 객관식"},
   {sem:"1학기", grade:2, type:"전공", code:"28401", name:"빈곤론", prof:"이현숙", eval:"과제물", finalEval:"객관식", sw:"선택", credits:3, book:"빈곤론", dept:"사회복지"},
   {sem:"1학기", grade:2, type:"전공", code:"28302", name:"사회복지역사", prof:"인지훈", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업+과제물 / 출석대체과제물", sw:"선택", credits:3, book:"U-KNOU캠퍼스 보충학습자료", dept:"사회복지"},
-  {sem:"1학기", grade:2, type:"전공", code:"28303", name:"장애인복지론", prof:"김영애", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업+과제물 / 출석대체과제물", sw:"선택", hf:true, credits:3, book:"장애인복지론", dept:"사회복지"},
+  {sem:"1학기", grade:2, type:"전공", code:"28303", name:"장애인복지론", prof:"김영애", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업+과제물 / 출석대체과제물", sw:"선택", hf:true, hfCat:"basic", hfBase:"장애인복지론", credits:3, book:"장애인복지론", dept:"사회복지"},
   {sem:"1학기", grade:2, type:"일선", code:"41370", name:"학교사회복지론", prof:"김영빈", eval:"과제물", finalEval:"객관식", sw:"선택", credits:3, book:"학교사회복지론", dept:"교육"},
   {sem:"1학기", grade:3, type:"전공", code:"28357", name:"분배와평등", prof:"인지훈", eval:"과제물", finalEval:"객관식", credits:3, book:"U-KNOU캠퍼스 강의록", dept:"사회복지"},
   {sem:"1학기", grade:3, type:"전공", code:"28301", name:"사회복지법제와실천", prof:"김영애", eval:"과제물", finalEval:"객관식", sw:"필수", credits:3, book:"사회복지법제와실천", dept:"사회복지"},
   {sem:"1학기", grade:3, type:"전공", code:"28305", name:"사회복지와인권", prof:"이현숙", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업+과제물 / 출석대체과제물", sw:"선택", credits:3, book:"사회복지와인권", dept:"사회복지"},
   {sem:"1학기", grade:3, type:"전공", code:"28201", name:"사회복지윤리와 철학", prof:"인지훈", eval:"과제물", finalEval:"객관식", sw:"선택", credits:3, book:"U-KNOU캠퍼스 강의록", dept:"사회복지"},
-  {sem:"1학기", grade:3, type:"전공", code:"22152", name:"사회복지학개론", prof:"유범상", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업+과제물 / 출석대체과제물", sw:"필수", hf:true, credits:3, book:"사회복지학개론", dept:"사회복지"},
+  {sem:"1학기", grade:3, type:"전공", code:"22152", name:"사회복지학개론", prof:"유범상", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업+과제물 / 출석대체과제물", sw:"필수", hf:true, hfCat:"basic", hfBase:"사회복지(개)론", credits:3, book:"사회복지학개론", dept:"사회복지"},
   {sem:"1학기", grade:3, type:"전공", code:"28355", name:"산업복지론", prof:"강상준", eval:"과제물", finalEval:"객관식", sw:"선택", credits:3, book:"산업복지론", dept:"사회복지"},
-  {sem:"1학기", grade:3, type:"전공", code:"28304", name:"프로그램개발과평가", prof:"박미진", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, credits:3, book:"U-KNOU캠퍼스 강의록", dept:"사회복지"},
-  {sem:"1학기", grade:4, type:"전공", code:"22355", name:"사회복지실천기술론", prof:"강상준", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업+과제물 / 출석대체과제물", sw:"필수", hf:true, credits:3, book:"사회복지실천기술론", dept:"사회복지"},
+  {sem:"1학기", grade:3, type:"전공", code:"28304", name:"프로그램개발과평가", prof:"박미진", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, hfCat:"practice", hfBase:"프로그램 개발과 평가", credits:3, book:"U-KNOU캠퍼스 강의록", dept:"사회복지"},
+  {sem:"1학기", grade:4, type:"전공", code:"22355", name:"사회복지실천기술론", prof:"강상준", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업+과제물 / 출석대체과제물", sw:"필수", hf:true, hfCat:"practice", hfBase:"사회복지실천기술론", credits:3, book:"사회복지실천기술론", dept:"사회복지"},
   {sem:"1학기", grade:4, type:"전공", code:"22474", name:"사회복지현장실습", prof:"강상준", eval:"-", sw:"필수", credits:3, book:"-", dept:"사회복지"},
   {sem:"1학기", grade:4, type:"전공", code:"28356", name:"후배시민론", prof:"이현숙", eval:"과제물", finalEval:"객관식", credits:3, book:"후배시민론", dept:"사회복지"},
-  {sem:"1학기", grade:4, type:"일선", code:"22563", name:"사회복지행정론", prof:"김영애 외", eval:"과제물", finalEval:"객관식", sw:"필수", hf:true, credits:3, book:"사회복지행정론", dept:"행정"},
+  {sem:"1학기", grade:4, type:"일선", code:"22563", name:"사회복지행정론", prof:"김영애 외", eval:"과제물", finalEval:"객관식", sw:"필수", hf:true, hfCat:"core", hfBase:"비영리기관 운영관리", credits:3, book:"사회복지행정론", dept:"행정", note:"건강가정사 핵심: 비영리기관 운영관리 동일교과"},
   {sem:"1학기", grade:4, type:"일선", name:"자연자원의이해", prof:"장호찬", eval:"과제물", finalEval:"객관식", credits:3, book:"자연자원의이해", dept:"관광"},
   {sem:"2학기", grade:1, type:"교양", code:"00171", name:"대학영어", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"대학영어", dept:"국어국문학과", note:"기말: 객관식"},
   {sem:"2학기", grade:1, type:"교양", code:"00126", name:"문학의이해", prof:"김신정", eval:"과제물", finalEval:"객관식", credits:3, book:"문학의이해", dept:"사회복지학과", note:"기말: 객관식"},
@@ -829,7 +946,7 @@ const courses = [
   {sem:"2학기", grade:1, type:"전공", code:"28104", name:"돌봄과노동", prof:"박미진", eval:"과제물", finalEval:"객관식", credits:3, book:"돌봄과노동", dept:"사회복지학과", note:"기말: 객관식"},
   {sem:"2학기", grade:1, type:"전공", code:"28351", name:"사회복지정의론", prof:"유범상", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", credits:3, book:"사회복지정의론", dept:"사회복지학과", note:"기말: 객관식"},
   {sem:"2학기", grade:1, type:"전공", code:"28105", name:"사회복지학적상상력", prof:"박정민", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", credits:3, book:"사회복지학적상상력", dept:"사회복지학과", note:"기말: 객관식"},
-  {sem:"2학기", grade:1, type:"일선", code:"41151", name:"인간행동과사회환경", prof:"전영욱", eval:"과제물", finalEval:"객관식", sw:"필수", hf:true, credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:1, type:"일선", code:"41151", name:"인간행동과사회환경", prof:"전영욱", eval:"과제물", finalEval:"객관식", sw:"필수", hf:true, hfCat:"basic", hfBase:"인간행동과 사회환경", credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
   {sem:"2학기", grade:2, type:"교양", code:"43211", name:"경제학의이해", prof:"이남형", eval:"과제물", finalEval:"객관식", credits:3, book:"경제학의 이해", dept:"사회복지학과", note:"기말: 객관식"},
   {sem:"2학기", grade:2, type:"교양", code:"00201", name:"대학수학의이해", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"대학수학의이해", dept:"행정학과", note:"기말: 객관식"},
   {sem:"2학기", grade:2, type:"교양", code:"00125", name:"인간과사회", prof:"김재형", eval:"과제물", finalEval:"과제물(온라인)", credits:3, book:"인간과사회", dept:"사회복지학과", note:"기말: 과제물(온라인)"},
@@ -837,14 +954,14 @@ const courses = [
   {sem:"2학기", grade:2, type:"교양", code:"00273", name:"취미와예술", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"취미와예술", dept:"국어국문학과", note:"기말: 객관식"},
   {sem:"2학기", grade:2, type:"전공", code:"28454", name:"사회복지와문화다양성", prof:"이현숙", eval:"과제물", finalEval:"객관식", sw:"선택", credits:3, book:"사회복지와 문화다양성", dept:"사회복지학과", note:"기말: 객관식"},
   {sem:"2학기", grade:2, type:"전공", code:"22206", name:"사회복지정책론", prof:"문병기·김영애", eval:"과제물", finalEval:"객관식", sw:"필수", credits:3, book:"사회복지정책론", dept:"사회복지학과", note:"기말: 객관식"},
-  {sem:"2학기", grade:2, type:"전공", code:"28202", name:"여성복지론", prof:"박미진", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, credits:3, book:"여성복지론", dept:"사회복지학과", note:"기말: 객관식"},
-  {sem:"2학기", grade:2, type:"전공", code:"33392", name:"지역사회복지론", prof:"강상준", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", sw:"필수", hf:true, credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:2, type:"전공", code:"28202", name:"여성복지론", prof:"박미진", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, hfCat:"basic", hfBase:"여성복지(론)", credits:3, book:"여성복지론", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:2, type:"전공", code:"33392", name:"지역사회복지론", prof:"강상준", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", sw:"필수", hf:true, hfCat:"practice", hfBase:"지역사회복지론", credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
   {sem:"2학기", grade:3, type:"교양", code:"21151", name:"생활법률", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"생활법률", dept:"국어국문학과", note:"기말: 객관식"},
   {sem:"2학기", grade:3, type:"교양", code:"00372", name:"인간과교육", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"인간과교육", dept:"국어국문학과", note:"기말: 객관식"},
-  {sem:"2학기", grade:3, type:"전공", code:"28450", name:"사례관리론", prof:"이현숙", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, credits:3, book:"사례관리론", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:3, type:"전공", code:"28450", name:"사례관리론", prof:"이현숙", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, hfCat:"practice", hfBase:"사례관리론", credits:3, book:"사례관리론", dept:"사회복지학과", note:"기말: 객관식"},
   {sem:"2학기", grade:3, type:"전공", code:"00471", name:"사회문제론", prof:"박정민", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", sw:"선택", credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
-  {sem:"2학기", grade:3, type:"전공", code:"45402", name:"사회복지실천론", prof:"서정원", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", sw:"필수", hf:true, credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
-  {sem:"2학기", grade:3, type:"전공", code:"41464", name:"사회복지조사론", prof:"김영애", eval:"과제물", finalEval:"객관식", sw:"필수", credits:3, book:"사회복지조사론", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:3, type:"전공", code:"45402", name:"사회복지실천론", prof:"서정원", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", sw:"필수", hf:true, hfCat:"practice", hfBase:"사회복지실천론", credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:3, type:"전공", code:"41464", name:"사회복지조사론", prof:"김영애", eval:"과제물", finalEval:"객관식", sw:"필수", hf:true, hfCat:"practice", hfBase:"연구(조사)방법론", credits:3, book:"사회복지조사론", dept:"사회복지학과", note:"기말: 객관식"},
   {sem:"2학기", grade:3, type:"전공", code:"28103", name:"선배시민론", prof:"유범상·이현숙", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", credits:3, book:"선배시민론", dept:"사회복지학과", note:"기말: 객관식"},
   {sem:"2학기", grade:3, type:"전공", code:"28306", name:"시민운동과NGO", prof:"박정민", eval:"과제물", finalEval:"객관식", credits:3, book:"시민운동과NGO", dept:"사회복지학과", note:"기말: 객관식"},
   {sem:"2학기", grade:4, type:"교양", code:"43312", name:"성,사랑,사회", prof:"-", eval:"과제물", finalEval:"객관식", credits:3, book:"성/사랑/사회", dept:"국어국문학과", note:"기말: 객관식"},
@@ -853,14 +970,14 @@ const courses = [
   {sem:"2학기", grade:4, type:"전공", code:"28451", name:"사회복지정치학", prof:"유범상", eval:"출석", finalEval:"객관식", attendanceHours:6, detail:"출석수업유형: 대면수업 / 대체: 출석대체과제물(온라인)", credits:3, book:"사회복지정치학", dept:"사회복지학과", note:"기말: 객관식"},
   {sem:"2학기", grade:4, type:"전공", code:"22474", name:"사회복지현장실습", prof:"강상준", eval:"실험실습", sw:"필수", credits:3, book:"-", dept:"사회복지학과"},
   {sem:"2학기", grade:4, type:"일선", code:"22421", name:"공공협치론", eval:"출석", finalEval:"객관식", attendanceHours:3, detail:"출석수업유형: 대면수업 / 대체: 대체시험", credits:3, dept:"행정학과", note:"행정학과 전공 / 사회복지학과 기준 일선 / 기말: 객관식"},
-  {sem:"2학기", grade:4, type:"일선", code:"33421", name:"노인복지론", prof:"성미애·이현숙", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, credits:3, book:"노인복지론", dept:"사회복지학과", note:"기말: 객관식"},
+  {sem:"2학기", grade:4, type:"일선", code:"33421", name:"노인복지론", prof:"성미애·이현숙", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, hfCat:"basic", hfBase:"노인복지론", credits:3, book:"노인복지론", dept:"사회복지학과", note:"기말: 객관식"},
   {sem:"2학기", grade:4, type:"일선", code:"46307", name:"노인체육론", prof:"박상현", eval:"과제물", finalEval:"객관식", credits:3, book:"U-KNOU캠퍼스 강의록 참고", dept:"사회복지학과", note:"기말: 객관식"},
   {sem:"2학기", grade:4, type:"일선", code:"41356", name:"문화와교육", prof:"윤여각", eval:"과제물", finalEval:"객관식", credits:3, book:"문화와교육", dept:"사회복지학과", note:"기말: 객관식"},
-  {sem:"기타", grade:0, type:"일선", code:"33354", name:"가족과문화", prof:"-", eval:"과제물", finalEval:"객관식", hf:true, credits:3, book:"-", dept:"생활과학부", note:"사회복지학과 개설 과목 아님"},
-  {sem:"기타", grade:0, type:"일선", code:"33418", name:"가족복지론", prof:"-", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, credits:3, book:"-", dept:"생활과학부", note:"사회복지학과 개설 과목 아님"},
-  {sem:"기타", grade:0, type:"일선", code:"33471", name:"가족상담 및 치료", prof:"-", eval:"과제물", finalEval:"객관식", hf:true, credits:3, book:"-", dept:"생활과학부", note:"사회복지학과 개설 과목 아님"},
-  {sem:"기타", grade:0, type:"일선", code:"33490", name:"가족생활교육", prof:"-", eval:"과제물", finalEval:"객관식", hf:true, credits:3, book:"-", dept:"생활과학부", note:"사회복지학과 개설 과목 아님"},
-  {sem:"기타", grade:0, type:"일선", code:"42152", name:"정신건강론", prof:"-", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, credits:3, book:"-", dept:"유아교육과", note:"사회복지학과 개설 과목 아님"},
+  {sem:"기타", grade:0, type:"일선", code:"33354", name:"가족과문화", prof:"-", eval:"과제물", finalEval:"객관식", hf:true, hfCat:"core", hfBase:"가족(정)과 문화", credits:3, book:"-", dept:"생활과학부", note:"사회복지학과 개설 과목 아님"},
+  {sem:"기타", grade:0, type:"일선", code:"33418", name:"가족복지론", prof:"-", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, hfCat:"core", hfBase:"가족복지론", credits:3, book:"-", dept:"생활과학부", note:"사회복지학과 개설 과목 아님"},
+  {sem:"기타", grade:0, type:"일선", code:"33471", name:"가족상담 및 치료", prof:"-", eval:"과제물", finalEval:"객관식", hf:true, hfCat:"core", hfBase:"가족상담(및 치료)", credits:3, book:"-", dept:"생활과학부", note:"사회복지학과 개설 과목 아님"},
+  {sem:"기타", grade:0, type:"일선", code:"33490", name:"가족생활교육", prof:"-", eval:"과제물", finalEval:"객관식", hf:true, hfCat:"core", hfBase:"가정(족)생활교육", credits:3, book:"-", dept:"생활과학부", note:"사회복지학과 개설 과목 아님"},
+  {sem:"기타", grade:0, type:"일선", code:"42152", name:"정신건강론", prof:"-", eval:"과제물", finalEval:"객관식", sw:"선택", hf:true, hfCat:"basic", hfBase:"정신건강(정신보건사회복지)론", credits:3, book:"-", dept:"유아교육과", note:"사회복지학과 개설 과목 아님"},
 ].map((c, idx)=>({id:idx+1, credits:3, sw:c.sw||"", hf:!!c.hf, attendanceHours:c.attendanceHours||0, finalEval:c.finalEval||"", detail:c.detail||"", note:c.note||"", ...c}));
 
 const admissionData = {
@@ -940,6 +1057,7 @@ function swTag(sw){
   return '';
 }
 function hfTag(c){
+  if(c.hfCat) return `<span class="tag hf">건·가 ${hfCatLabel(c.hfCat)}</span>`;
   return c.hf ? '<span class="tag hf">건강가정사</span>' : '';
 }
 function evalTag(c){
@@ -1113,9 +1231,51 @@ function getGroupedByTerm(){
   });
   return groups;
 }
+
+function hfCatLabel(cat){
+  if(cat === "core") return "핵심";
+  if(cat === "basic") return "기초";
+  if(cat === "practice") return "실제";
+  return "건가";
+}
+function hfCatClass(cat){
+  if(cat === "core") return "hf-core";
+  if(cat === "basic") return "hf-basic";
+  if(cat === "practice") return "hf-practice";
+  return "hf";
+}
+function uniqueHfCourses(sel, cat){
+  const seen = new Set();
+  const list = [];
+  sel.forEach(c => {
+    if(c.hfCat === cat){
+      const key = c.hfBase || c.name;
+      if(!seen.has(key)){
+        seen.add(key);
+        list.push(c);
+      }
+    }
+  });
+  return list;
+}
+function setHfCard(id, count, required){
+  const card = el(id);
+  if(!card) return;
+  card.classList.toggle("ok", count >= required);
+}
+function setText(id, value){
+  const node = el(id);
+  if(node) node.textContent = value;
+}
+function hfSubjectText(list){
+  if(!list.length) return "선택 과목 없음";
+  return list.map(c => c.name).join(", ");
+}
+
 function termCategoryClass(c){
   if(c.sw === "필수") return "req";
   if(c.sw === "선택") return "ele";
+  if(c.hfCat) return hfCatClass(c.hfCat);
   if(c.hf) return "hf";
   if(c.type === "교양") return "gen";
   return "default";
@@ -1124,7 +1284,8 @@ function termCategoryLabel(c){
   const labels = [];
   if(c.sw === "필수") labels.push("필수");
   if(c.sw === "선택") labels.push("선택");
-  if(c.hf) labels.push("건가");
+  if(c.hfCat) labels.push(hfCatLabel(c.hfCat));
+  else if(c.hf) labels.push("건가");
   if(c.type === "교양") labels.push("교양");
   return labels.length ? labels.join("·") : c.type;
 }
@@ -1193,6 +1354,10 @@ function updateSummary(){
 
   const swReq = sel.filter(c=>c.sw==="필수").length;
   const swEle = sel.filter(c=>c.sw==="선택").length;
+  const hfCore = uniqueHfCourses(sel, "core");
+  const hfBasic = uniqueHfCourses(sel, "basic");
+  const hfPractice = uniqueHfCourses(sel, "practice");
+
   el("totalCredits").textContent = total;
   el("majorCredits").textContent = major;
   el("generalCredits").textContent = general;
@@ -1200,6 +1365,12 @@ function updateSummary(){
   el("majorReqText").textContent = `${majorReq}학점 이상`;
   el("swReqCount").textContent = swReq;
   el("swEleCount").textContent = swEle;
+  setText("hfCoreCount", hfCore.length);
+  setText("hfBasicCount", hfBasic.length);
+  setText("hfPracticeCount", hfPractice.length);
+  setText("hfCoreSubjects", hfSubjectText(hfCore));
+  setText("hfBasicSubjects", hfSubjectText(hfBasic));
+  setText("hfPracticeSubjects", hfSubjectText(hfPractice));
 
   setBar("barTotal", total, 130);
   setBar("barMajor", major, majorReq);
@@ -1212,6 +1383,9 @@ function updateSummary(){
   setMetricState("mGeneral", general >= 24, general >= 18);
   setMetricState("mSwReq", swReq >= 10, swReq >= 8);
   setMetricState("mSwEle", swEle >= 7, swEle >= 5);
+  setHfCard("mHfCore", hfCore.length, 5);
+  setHfCard("mHfBasic", hfBasic.length, 4);
+  setHfCard("mHfPractice", hfPractice.length, 3);
 }
 function cleanInvalidTerms(){
   const keys = getTerms().map(t=>t.key);
